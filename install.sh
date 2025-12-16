@@ -131,7 +131,7 @@ handle_conflict() {
     
     case $conflict_choice in
         1)
-            return 0  # 继续安装
+            return 0  # 继续安装，返回 0 且不输出名称
             ;;
         2)
             read -p "请输入新的命令名称 (默认: ${tool_name}-custom): " new_name
@@ -381,6 +381,9 @@ show_contact() {
     
     read -p "按 Enter 返回主菜单..."
 }
+
+# 卸载菜单函数（修复：之前这段代码缺少函数头导致脚本语法错误）
+uninstall_menu() {
     local files=("$@")
     local installed=()
     
@@ -536,4 +539,3 @@ main() {
 
 # 运行主函数
 main
-

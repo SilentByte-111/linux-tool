@@ -1,5 +1,5 @@
 #!/usr/bin/env fish
-# Clash 控制面板
+# 功能：Clash 控制面板
 
 function clashctl
     while true

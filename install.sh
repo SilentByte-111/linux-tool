@@ -366,10 +366,10 @@ show_contact() {
     echo ""
     echo -e "  ${BOLD}👤 作者:${NC} ${MAGENTA}零意${NC}"
     echo ""
-    echo -e "  ${BOLD}💬 联系方式:${NC}"
+    echo -e "  ${BOLD}💬 联系QQ:2101497063${NC}"
     echo -e "     QQ: ${BLUE}https://qm.qq.com/q/LgAL9PiIY8${NC}"
     echo ""
-    echo -e "  ${BOLD}👥 加入群聊:${NC}"
+    echo -e "  ${BOLD}👥 加入Q群:829665083${NC}"
     echo -e "     群: ${BLUE}https://qm.qq.com/q/25rfBURNe8${NC}"
     echo ""
     echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
@@ -536,3 +536,4 @@ main() {
 
 # 运行主函数
 main
+

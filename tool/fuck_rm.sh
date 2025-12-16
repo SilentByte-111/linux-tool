@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# 功能：禁用危险命令
 # Linux危险命令防护脚本
 # 用途：防止误执行危险的系统命令
 # 使用方法：sudo bash protect_system.sh

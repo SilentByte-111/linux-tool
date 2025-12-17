@@ -18,8 +18,12 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 CYAN='\033[0;36m'
 MAGENTA='\033[0;35m'
+PURPLE='\033[0;35m'
+ORANGE='\033[0;33m'
 NC='\033[0m' # No Color
 BOLD='\033[1m'
+ITALIC='\033[3m'
+UNDERLINE='\033[4m'
 
 # 脚本目录（当脚本以文件运行时有效）
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-}")" 2>/dev/null || pwd) || true"
@@ -43,36 +47,31 @@ REMOTE_DOWNLOAD_URLS=()
 
 # 打印带颜色的消息
 print_info() {
-    echo -e "${BLUE}[INFO]${NC} $1"
+    echo -e "  ${CYAN}ℹ️  [INFO]${NC} $1"
 }
 print_success() {
-    echo -e "${GREEN}[SUCCESS]${NC} $1"
+    echo -e "  ${GREEN}✅ [SUCCESS]${NC} $1"
 }
 print_error() {
-    echo -e "${RED}[ERROR]${NC} $1" >&2
+    echo -e "  ${RED}❌ [ERROR]${NC} $1" >&2
 }
 print_warning() {
-    echo -e "${YELLOW}[WARNING]${NC} $1"
+    echo -e "  ${YELLOW}⚠️  [WARNING]${NC} $1"
 }
 
 # 检查是否有 root 权限
 check_root() {
     if [ "$EUID" -ne 0 ]; then
         print_error "此脚本需要 root 权限运行"
-        echo "请使用: sudo bash -c 'curl -sSL <URL> | tr -d \"\\r\" | bash -s --'"
+        echo -e "  ${YELLOW}💡 提示:${NC} 请使用: ${BOLD}sudo bash -c 'curl -sSL <URL> | tr -d \"\\r\" | bash -s --'${NC}"
         exit 1
     fi
 }
 
-# 检查本地 tool 目录是否存在，不存在则启用远程模式
+# 自动检测并启动远程模式（直接启用远程模式，不检测本地目录）
 check_tool_dir_or_remote() {
-    if [ -d "$TOOL_DIR" ]; then
-        USE_REMOTE=0
-        return 0
-    fi
-
-    # 如果当前目录下没有 tool，则使用远程模式
-    print_info "未发现本地 tool/ 目录，尝试使用 GitHub 仓库的远程文件列表..."
+    # 直接启用远程模式
+    print_info "正在使用 GitHub 仓库的远程文件列表..."
     USE_REMOTE=1
     fetch_remote_file_list || {
         print_error "无法从 GitHub 获取 tool 列表，请检查网络或仓库设置。"
@@ -207,13 +206,15 @@ handle_conflict() {
     local conflicts="$2"
 
     print_warning "检测到命令冲突: $tool_name"
-    echo "现有命令位置: $conflicts"
+    echo -e "  ${RED}⚠️  当前命令位置:${NC} $conflicts"
     echo ""
-    echo "  1) 覆盖安装 (替换现有命令)"
-    echo "  2) 使用别名安装 (例如: ${tool_name}-custom)"
-    echo "  3) 跳过此工具"
+    echo -e "  ${CYAN}┌─ 选择处理方式 ─────────────────────────────────────┐${NC}"
+    echo -e "  ${CYAN}│${NC} ${GREEN}1)${NC} 覆盖安装 (替换现有命令)                     ${CYAN}│${NC}"
+    echo -e "  ${CYAN}│${NC} ${GREEN}2)${NC} 使用别名安装 (例如: ${tool_name}-custom)      ${CYAN}│${NC}"
+    echo -e "  ${CYAN}│${NC} ${GREEN}3)${NC} 跳过此工具                                   ${CYAN}│${NC}"
+    echo -e "  ${CYAN}└──────────────────────────────────────────────────┘${NC}"
     echo ""
-    read -r -p "请选择 [1-3]: " conflict_choice </dev/tty
+    read -r -p "  ${YELLOW}👉 请选择 [1-3]: ${NC}" conflict_choice </dev/tty
 
     case $conflict_choice in
         1)
@@ -235,23 +236,29 @@ handle_conflict() {
 show_logo() {
     echo -e "${CYAN}"
     cat << "EOF"
- _     _                    _____           _ 
+ _     _                    _____           _
 | |   (_)_ __  _   ___  __ |_   _|__   ___ | |
 | |   | | '_ \| | | \ \/ /   | |/ _ \ / _ \| |
 | |___| | | | | |_| |>  <    | | (_) | (_) | |
 |_____|_|_| |_|\__,_/_/\_\   |_|\___/ \___/|_|
-                                              
+
 
 EOF
     echo -e "${NC}"
-    echo -e "${BOLD}    强大的 Linux 工具集合管理器${NC}"
-    echo -e "    作者: ${MAGENTA}零意${NC}"
+    echo -e "   ${BOLD}${CYAN}╔══════════════════════════════════════╗${NC}"
+    echo -e "   ${BOLD}${CYAN}║${NC}    ${BOLD}强大的 Linux 工具集合管理器${NC}       ${BOLD}${CYAN}║${NC}"
+    echo -e "   ${BOLD}${CYAN}║${NC}         ${MAGENTA}/by 零意${NC}                   ${BOLD}${CYAN}║${NC}"
+    echo -e "   ${BOLD}${CYAN}╚══════════════════════════════════════╝${NC}"
     echo ""
 }
 
 show_welcome() {
     clear
     show_logo
+    echo -e "  ${BOLD}${CYAN}┌─ 欢迎使用 Linux 工具集合管理器 ──────────────────────────────────────────┐${NC}"
+    echo -e "  ${BOLD}${CYAN}│${NC}     ${GREEN}✨ 一键管理您的 Linux 工具集 ✨${NC} | version: v1.1                  ${BOLD}${CYAN}│${NC}"
+    echo -e "  ${BOLD}${CYAN}└─ 欢迎使用 Linux 工具集合管理器 ──────────────────────────────────────────┘${NC}"
+    echo ""
 }
 
 get_total_pages() {
@@ -276,9 +283,9 @@ show_paged_menu() {
         exit 0
     fi
 
-    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo -e "${BOLD}可用工具列表${NC} (第 ${CURRENT_PAGE}/${total_pages} 页, 共 ${total} 个工具)"
-    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "${BOLD}${CYAN}┌─ 可用工具列表 ──────────────────────────────────────────────────────────┐${NC}"
+    echo -e "  ${BOLD}工具列表${NC} (第 ${CURRENT_PAGE}/${total_pages} 页, 共 ${total} 个工具)"
+    echo -e "${BOLD}${CYAN}└─ 可用工具列表 ──────────────────────────────────────────────────────────┘${NC}"
     echo ""
 
     local max_name_len=0
@@ -318,25 +325,25 @@ show_paged_menu() {
         fi
 
         if $is_selected; then
-            echo -e "  ${MAGENTA}[✓]${NC} $num) $name$spaces$status - $desc"
+            echo -e "  ${MAGENTA}●${NC} $num) ${BOLD}$name${NC}$spaces$status - $desc"
         else
-            echo -e "  [ ] $num) $name$spaces$status - $desc"
+            echo -e "  ○ $num) $name$spaces$status - $desc"
         fi
     done
 
     echo ""
-    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "${BOLD}${CYAN}┌─ 操作指令 ──────────────────────────────────────────────────────────────┐${NC}"
     if [ ${#SELECTED_ITEMS[@]} -gt 0 ]; then
-        echo -e "${MAGENTA}已选中: ${#SELECTED_ITEMS[@]} 个工具${NC}"
-        echo ""
+        echo -e "  ${MAGENTA}已选中: ${BOLD}${#SELECTED_ITEMS[@]}${NC} 个工具${NC}"
+        echo -e "${BOLD}${CYAN}├───────────────────────────────────────────────────────────────────────┤${NC}"
     fi
 
-    echo "操作指令:"
-    echo "  [数字]     选择/取消选择工具    [Enter]    安装已选中的工具"
-    echo "  [n/→]      下一页              [p/←]      上一页"
-    echo "  [a]        全选当前页          [A]        全选所有"
-    echo "  [c]        清空选择            [u]        卸载工具"
-    echo "  [i]        联系作者            [q]        退出"
+    echo -e "  ${GREEN}[数字]${NC}       选择/取消选择工具    ${GREEN}[Enter]${NC}    安装已选中的工具"
+    echo -e "  ${GREEN}[n/→]${NC}        下一页              ${GREEN}[p/←]${NC}      上一页"
+    echo -e "  ${GREEN}[a]${NC}          全选当前页          ${GREEN}[A]${NC}        全选所有"
+    echo -e "  ${GREEN}[c]${NC}          清空选择            ${GREEN}[u]${NC}        卸载工具"
+    echo -e "  ${GREEN}[i]${NC}          联系作者            ${GREEN}[q]${NC}        退出"
+    echo -e "${BOLD}${CYAN}└─ 操作指令 ──────────────────────────────────────────────────────────────┘${NC}"
     echo ""
 }
 
@@ -408,8 +415,9 @@ install_selected() {
         return
     fi
 
-    echo ""
+    echo -e "${BOLD}${CYAN}┌─ 开始安装 ──────────────────────────────────────────────────────────────┐${NC}"
     print_info "准备安装 ${#SELECTED_ITEMS[@]} 个工具..."
+    echo -e "${BOLD}${CYAN}└─ 开始安装 ──────────────────────────────────────────────────────────────┘${NC}"
     echo ""
 
     local success_count=0
@@ -442,36 +450,112 @@ install_selected() {
     done
 
     echo ""
-    echo -e "${BOLD}安装完成!${NC}"
-    echo "  成功: ${GREEN}$success_count${NC}"
-    echo "  跳过: ${YELLOW}$skip_count${NC}"
-    echo "  失败: ${RED}$fail_count${NC}"
+    echo -e "${BOLD}${GREEN}┌─ 安装完成 ──────────────────────────────────────────────────────────────┐${NC}"
+    echo -e "  ${BOLD}状态统计:${NC}"
+    echo -e "    ${GREEN}✅ 成功: $success_count${NC}"
+    echo -e "    ${YELLOW}⚠️  跳过: $skip_count${NC}"
+    echo -e "    ${RED}❌ 失败: $fail_count${NC}"
+    echo -e "${BOLD}${GREEN}└─ 安装完成 ──────────────────────────────────────────────────────────────┘${NC}"
 
     SELECTED_ITEMS=()
 }
 
+# 打开链接函数（尝试在终端或浏览器中打开链接）
+open_link() {
+    local url="$1"
+    local name="$2"
+
+    if command -v xdg-open >/dev/null 2>&1; then
+        echo -e "  ${GREEN}正在尝试使用默认浏览器打开 $name...${NC}"
+        xdg-open "$url" 2>/dev/null &
+        sleep 1
+    elif command -v open >/dev/null 2>&1; then
+        echo -e "  ${GREEN}正在尝试使用默认浏览器打开 $name...${NC}"
+        open "$url" 2>/dev/null &
+        sleep 1
+    elif command -v curl >/dev/null 2>&1; then
+        echo -e "  ${YELLOW}请复制以下链接在浏览器中打开: ${NC}${BLUE}$url${NC}"
+    else
+        echo -e "  ${YELLOW}请复制以下链接在浏览器中打开: ${NC}${BLUE}$url${NC}"
+    fi
+}
+
 show_contact() {
-    clear
-    show_logo
-    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo -e "${BOLD}联系作者${NC}"
-    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo ""
-    echo -e "  ${BOLD}👤 作者:${NC} ${MAGENTA}零意${NC}"
-    echo ""
-    echo -e "  ${BOLD}💬 联系QQ:2101497063${NC}"
-    echo -e "     QQ: ${BLUE}https://qm.qq.com/q/LgAL9PiIY8${NC}"
-    echo ""
-    echo -e "  ${BOLD}👥 加入Q群:829665083${NC}"
-    echo -e "     群: ${BLUE}https://qm.qq.com/q/25rfBURNe8${NC}"
-    echo ""
-    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo ""
-    echo -e "  ${YELLOW}提示: 你可以复制上面的链接在浏览器中打开${NC}"
-    echo ""
-    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo ""
-    read -r -p "按 Enter 返回主菜单..." </dev/tty
+    while true; do
+        clear
+        show_logo
+        echo -e "${BOLD}${CYAN}┌─ 联系作者 ──────────────────────────────────────────────────────────────┐${NC}"
+        echo -e "  ${BOLD}联系方式${NC}"
+        echo -e "${BOLD}${CYAN}└─ 联系作者 ──────────────────────────────────────────────────────────────┘${NC}"
+        echo ""
+        echo -e "  ${BOLD}${GREEN}┌─ 个人联系 ─────────────────────────────────────────┐${NC}"
+        echo -e "  ${BOLD}👤 作者:${NC} ${MAGENTA}零意${NC}"
+        echo -e "  ${GREEN}1)${NC} 💬 联系QQ: 2101497063"
+        echo -e "     🔗 https://qm.qq.com/q/LgAL9PiIY8"
+        echo -e "  ${BOLD}${GREEN}└─────────────────────────────────────────────────────┘${NC}"
+        echo ""
+        echo -e "  ${BOLD}${PURPLE}┌─ 社区交流 ─────────────────────────────────────────┐${NC}"
+        echo -e "  ${GREEN}2)${NC} 👥 加入Q群: 829665083"
+        echo -e "     🔗 https://qm.qq.com/q/25rfBURNe8"
+        echo -e "  ${BOLD}${PURPLE}└─────────────────────────────────────────────────────┘${NC}"
+        echo ""
+        echo -e "  ${BOLD}${YELLOW}┌─ 更多链接 ─────────────────────────────────────────┐${NC}"
+        echo -e "  ${GREEN}3)${NC} 🐙 GitHub: @Xiaoxinyun2008"
+        echo -e "     🔗 https://github.com/Xiaoxinyun2008"
+        echo -e "  ${GREEN}4)${NC} 🌐 网站: 小韵🧰"
+        echo -e "     🔗 https://xn--yetw70l.xyz"
+        echo -e "  ${GREEN}5)${NC} 💻 CSDN: 小韵666"
+        echo -e "     🔗 https://blog.csdn.net/2401_82802633?spm=1000.2115.3001.5343"
+        echo -e "  ${GREEN}6)${NC} 📖 知乎: 零意"
+        echo -e "     🔗 https://www.zhihu.com/people/xxy46548"
+        echo -e "  ${GREEN}7)${NC} 📺 哔哩哔哩: 像深渊一样沉默"
+        echo -e "     🔗 https://space.bilibili.com/1198508132?spm_id_from=333.1007.0.0"
+        echo -e "  ${BOLD}${YELLOW}└─────────────────────────────────────────────────────┘${NC}"
+        echo ""
+        echo -e "  ${BOLD}${CYAN}┌─ 操作选项 ─────────────────────────────────────────┐${NC}"
+        echo -e "    ${GREEN}[数字]${NC}  打开对应链接    ${GREEN}[b]${NC} 返回主菜单"
+        echo -e "  ${BOLD}${CYAN}└─────────────────────────────────────────────────────┘${NC}"
+        echo ""
+        read -r -p "  ${YELLOW}👉 请选择要打开的链接 [1-7] 或返回 [b]: ${NC}" choice </dev/tty
+
+        case $choice in
+            1)
+                open_link "https://qm.qq.com/q/LgAL9PiIY8" "QQ"
+                read -r -p "  ${YELLOW}按 Enter 继续...${NC}" </dev/tty
+                ;;
+            2)
+                open_link "https://qm.qq.com/q/25rfBURNe8" "Q群"
+                read -r -p "  ${YELLOW}按 Enter 继续...${NC}" </dev/tty
+                ;;
+            3)
+                open_link "https://github.com/Xiaoxinyun2008" "GitHub"
+                read -r -p "  ${YELLOW}按 Enter 继续...${NC}" </dev/tty
+                ;;
+            4)
+                open_link "https://xn--yetw70l.xyz" "网站"
+                read -r -p "  ${YELLOW}按 Enter 继续...${NC}" </dev/tty
+                ;;
+            5)
+                open_link "https://blog.csdn.net/2401_82802633?spm=1000.2115.3001.5343" "CSDN"
+                read -r -p "  ${YELLOW}按 Enter 继续...${NC}" </dev/tty
+                ;;
+            6)
+                open_link "https://www.zhihu.com/people/xxy46548" "知乎"
+                read -r -p "  ${YELLOW}按 Enter 继续...${NC}" </dev/tty
+                ;;
+            7)
+                open_link "https://space.bilibili.com/1198508132?spm_id_from=333.1007.0.0" "B站"
+                read -r -p "  ${YELLOW}按 Enter 继续...${NC}" </dev/tty
+                ;;
+            [bB])
+                break
+                ;;
+            *)
+                echo -e "  ${RED}❌ 无效选择，请输入 1-7 或 b${NC}"
+                sleep 2
+                ;;
+        esac
+    done
 }
 
 uninstall_menu() {
@@ -492,24 +576,29 @@ uninstall_menu() {
     fi
 
     clear
-    echo -e "${BOLD}======================================"
-    echo "   卸载工具"
-    echo -e "======================================${NC}"
+    echo -e "${BOLD}${CYAN}┌─ 卸载工具 ──────────────────────────────────────────────────────────────┐${NC}"
+    echo -e "  ${BOLD}卸载管理${NC}"
+    echo -e "${BOLD}${CYAN}└─ 卸载工具 ──────────────────────────────────────────────────────────────┘${NC}"
     echo ""
-    echo "已安装的工具:"
+    echo -e "  ${BOLD}${GREEN}┌─ 已安装工具 ───────────────────────────────────────┐${NC}"
+    echo -e "  ${BOLD}已安装的工具:${NC}"
     echo ""
 
     for i in "${!installed[@]}"; do
-        echo "  $((i + 1))) ${installed[$i]}"
+        echo -e "    ${GREEN}$((i + 1)))${NC} ${BOLD}${installed[$i]}${NC}"
     done
 
+    echo -e "  ${BOLD}${GREEN}└─ 已安装工具 ───────────────────────────────────────┘${NC}"
     echo ""
-    echo "  [a] 卸载全部    [b] 返回"
+    echo -e "  ${BOLD}${YELLOW}┌─ 操作选项 ─────────────────────────────────────────┐${NC}"
+    echo -e "    ${GREEN}[a]${NC} 卸载全部    ${GREEN}[b]${NC} 返回"
+    echo -e "  ${BOLD}${YELLOW}└─ 操作选项 ─────────────────────────────────────────┘${NC}"
     echo ""
-    read -r -p "请输入编号或选项: " uninstall_choice </dev/tty
+    read -r -p "  ${YELLOW}👉 请输入编号或选项: ${NC}" uninstall_choice </dev/tty
 
     case $uninstall_choice in
         [aA])
+            echo -e "  ${RED}⚠️  正在卸载所有工具...${NC}"
             for name in "${installed[@]}"; do
                 rm -f "$INSTALL_DIR/$name"
                 print_success "已卸载: $name"
@@ -530,7 +619,7 @@ uninstall_menu() {
     esac
 
     echo ""
-    read -r -p "按 Enter 继续..." </dev/tty
+    read -r -p "  ${YELLOW}按 Enter 继续... ${NC}" </dev/tty
 }
 
 main() {
@@ -627,4 +716,3 @@ main() {
 }
 
 main
-

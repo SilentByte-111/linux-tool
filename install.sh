@@ -45,6 +45,9 @@ SELECTED_ITEMS=()
 REMOTE_FILES=()
 REMOTE_DOWNLOAD_URLS=()
 
+# 版本控制
+version=v1.2 
+
 # 打印带颜色的消息
 print_info() {
     echo -e "  ${CYAN}ℹ️  [INFO]${NC} $1"
@@ -256,7 +259,7 @@ show_welcome() {
     clear
     show_logo
     echo -e "  ${BOLD}${CYAN}┌─ 欢迎使用 Linux 工具集合管理器 ──────────────────────────────────────────┐${NC}"
-    echo -e "  ${BOLD}${CYAN}│${NC}     ${GREEN}✨ 一键管理您的 Linux 工具集 ✨${NC} | version: v1.1                  ${BOLD}${CYAN}│${NC}"
+    echo -e "  ${BOLD}${CYAN}│${NC}     ${GREEN}✨ 一键管理您的 Linux 工具集 ✨${NC} |  $version                ${BOLD}${CYAN}│${NC}"
     echo -e "  ${BOLD}${CYAN}└─ 欢迎使用 Linux 工具集合管理器 ──────────────────────────────────────────┘${NC}"
     echo ""
 }
@@ -481,9 +484,9 @@ open_link() {
 }
 
 show_contact() {
+    clear
+    show_logo
     while true; do
-        clear
-        show_logo
         echo -e "${BOLD}${CYAN}┌─ 联系作者 ──────────────────────────────────────────────────────────────┐${NC}"
         echo -e "  ${BOLD}联系方式${NC}"
         echo -e "${BOLD}${CYAN}└─ 联系作者 ──────────────────────────────────────────────────────────────┘${NC}"
@@ -491,61 +494,91 @@ show_contact() {
         echo -e "  ${BOLD}${GREEN}┌─ 个人联系 ─────────────────────────────────────────┐${NC}"
         echo -e "  ${BOLD}👤 作者:${NC} ${MAGENTA}零意${NC}"
         echo -e "  ${GREEN}1)${NC} 💬 联系QQ: 2101497063"
-        echo -e "     🔗 https://qm.qq.com/q/LgAL9PiIY8"
+        #echo -e "     🔗 https://qm.qq.com/q/LgAL9PiIY8"
         echo -e "  ${BOLD}${GREEN}└─────────────────────────────────────────────────────┘${NC}"
         echo ""
         echo -e "  ${BOLD}${PURPLE}┌─ 社区交流 ─────────────────────────────────────────┐${NC}"
         echo -e "  ${GREEN}2)${NC} 👥 加入Q群: 829665083"
-        echo -e "     🔗 https://qm.qq.com/q/25rfBURNe8"
+        #echo -e "     🔗 https://qm.qq.com/q/25rfBURNe8"
         echo -e "  ${BOLD}${PURPLE}└─────────────────────────────────────────────────────┘${NC}"
         echo ""
         echo -e "  ${BOLD}${YELLOW}┌─ 更多链接 ─────────────────────────────────────────┐${NC}"
         echo -e "  ${GREEN}3)${NC} 🐙 GitHub: @Xiaoxinyun2008"
-        echo -e "     🔗 https://github.com/Xiaoxinyun2008"
-        echo -e "  ${GREEN}4)${NC} 🌐 网站: 小韵🧰"
-        echo -e "     🔗 https://xn--yetw70l.xyz"
-        echo -e "  ${GREEN}5)${NC} 💻 CSDN: 小韵666"
-        echo -e "     🔗 https://blog.csdn.net/2401_82802633?spm=1000.2115.3001.5343"
-        echo -e "  ${GREEN}6)${NC} 📖 知乎: 零意"
-        echo -e "     🔗 https://www.zhihu.com/people/xxy46548"
-        echo -e "  ${GREEN}7)${NC} 📺 哔哩哔哩: 像深渊一样沉默"
-        echo -e "     🔗 https://space.bilibili.com/1198508132?spm_id_from=333.1007.0.0"
+        #echo -e "     🔗 https://github.com/Xiaoxinyun2008"
+        echo -e "  ${GREEN}4)${NC} 🔗 Gitee: 小韵"
+        #echo -e "     🔗  https://gitee.com/xytool"
+        echo -e "  ${GREEN}5)${NC} 🌐 网站: 小韵🧰"
+        #echo -e "     🔗 https://xn--yetw70l.xyz"
+        echo -e "  ${GREEN}6)${NC} 💻 CSDN: 小韵666"
+        #echo -e "     🔗 https://blog.csdn.net/2401_82802633?spm=1000.2115.3001.5343"
+        echo -e "  ${GREEN}7)${NC} 📖 知乎: 零意"
+        #echo -e "     🔗 https://www.zhihu.com/people/xxy46548"
+        echo -e "  ${GREEN}8)${NC} 📺 哔哩哔哩: 像深渊一样沉默"
+        #echo -e "     🔗 https://space.bilibili.com/1198508132?spm_id_from=333.1007.0.0"
         echo -e "  ${BOLD}${YELLOW}└─────────────────────────────────────────────────────┘${NC}"
         echo ""
         echo -e "  ${BOLD}${CYAN}┌─ 操作选项 ─────────────────────────────────────────┐${NC}"
         echo -e "    ${GREEN}[数字]${NC}  打开对应链接    ${GREEN}[b]${NC} 返回主菜单"
         echo -e "  ${BOLD}${CYAN}└─────────────────────────────────────────────────────┘${NC}"
         echo ""
-        read -r -p "  ${YELLOW}👉 请选择要打开的链接 [1-7] 或返回 [b]: ${NC}" choice </dev/tty
+        read -r -p "  ${YELLOW}👉 请选择要打开的链接 [1-8] 或返回 [b]: ${NC}" choice </dev/tty
 
         case $choice in
             1)
+                echo ""  # 添加空行以分隔
                 open_link "https://qm.qq.com/q/LgAL9PiIY8" "QQ"
                 read -r -p "  ${YELLOW}按 Enter 继续...${NC}" </dev/tty
+                clear
+                show_logo  # 重新显示logo和菜单
                 ;;
             2)
+                echo ""  # 添加空行以分隔
                 open_link "https://qm.qq.com/q/25rfBURNe8" "Q群"
                 read -r -p "  ${YELLOW}按 Enter 继续...${NC}" </dev/tty
+                clear
+                show_logo  # 重新显示logo和菜单
                 ;;
             3)
+                echo ""  # 添加空行以分隔
                 open_link "https://github.com/Xiaoxinyun2008" "GitHub"
                 read -r -p "  ${YELLOW}按 Enter 继续...${NC}" </dev/tty
+                clear
+                show_logo  # 重新显示logo和菜单
                 ;;
             4)
-                open_link "https://xn--yetw70l.xyz" "网站"
+                echo ""  # 添加空行以分隔
+                open_link "https://gitee.com/xytool" "Gitee"
                 read -r -p "  ${YELLOW}按 Enter 继续...${NC}" </dev/tty
+                clear
+                show_logo  # 重新显示logo和菜单
                 ;;
             5)
-                open_link "https://blog.csdn.net/2401_82802633?spm=1000.2115.3001.5343" "CSDN"
+                echo ""  # 添加空行以分隔
+                open_link "https://xn--yetw70l.xyz" "网站"
                 read -r -p "  ${YELLOW}按 Enter 继续...${NC}" </dev/tty
+                clear
+                show_logo  # 重新显示logo和菜单
                 ;;
             6)
-                open_link "https://www.zhihu.com/people/xxy46548" "知乎"
+                echo ""  # 添加空行以分隔
+                open_link "https://blog.csdn.net/2401_82802633?spm=1000.2115.3001.5343" "CSDN"
                 read -r -p "  ${YELLOW}按 Enter 继续...${NC}" </dev/tty
+                clear
+                show_logo  # 重新显示logo和菜单
                 ;;
             7)
+                echo ""  # 添加空行以分隔
+                open_link "https://www.zhihu.com/people/xxy46548" "知乎"
+                read -r -p "  ${YELLOW}按 Enter 继续...${NC}" </dev/tty
+                clear
+                show_logo  # 重新显示logo和菜单
+                ;;
+            8)
+                echo ""  # 添加空行以分隔
                 open_link "https://space.bilibili.com/1198508132?spm_id_from=333.1007.0.0" "B站"
                 read -r -p "  ${YELLOW}按 Enter 继续...${NC}" </dev/tty
+                clear
+                show_logo  # 重新显示logo和菜单
                 ;;
             [bB])
                 break
@@ -553,6 +586,8 @@ show_contact() {
             *)
                 echo -e "  ${RED}❌ 无效选择，请输入 1-7 或 b${NC}"
                 sleep 2
+                clear
+                show_logo  # 重新显示logo和菜单
                 ;;
         esac
     done

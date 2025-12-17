@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Description: Linux危险命令防护脚本，防止误执行危险的系统命令如rm、dd等
+# 用途：防止误执行危险的系统命令
+# 使用方法：fuck_rm
+
 # MIT License
 #
 # Copyright (c) 2025 Xiaoxinyun2008
@@ -21,10 +25,6 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
-# Linux危险命令防护脚本
-# 用途：防止误执行危险的系统命令
-# 使用方法：fuck_rm
 
 # 检查是否以root权限运行
 if [ "$EUID" -ne 0 ]; then 

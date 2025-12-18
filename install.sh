@@ -521,7 +521,7 @@ show_contact() {
         echo -e "    ${GREEN}[数字]${NC}  打开对应链接    ${GREEN}[b]${NC} 返回主菜单"
         echo -e "  ${BOLD}${CYAN}└─────────────────────────────────────────────────────┘${NC}"
         echo ""
-        read -r -p "  ${YELLOW}👉 请选择要打开的链接 [1-8] 或返回 [b]: ${NC}" choice </dev/tty
+        read -r -p "  👉 请选择要打开的链接 [1-8] 或返回 [b]: " choice </dev/tty
 
         case $choice in
             1)

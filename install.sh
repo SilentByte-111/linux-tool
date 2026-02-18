@@ -7,7 +7,7 @@
 set -euo pipefail
 
 # 配置仓库信息（如将来需要修改分支或仓库，可在这里改）
-REPO_OWNER="Xiaoxinyun2008"
+REPO_OWNER="SilentByte-111"
 REPO_NAME="linux-tool"
 BRANCH="main"
 

@@ -30,7 +30,7 @@ Linux工具集是一个开源的实用工具包，旨在为Linux用户提供便�
 
 ### 快速安装
 ```bash
-curl -sSL https://raw.githubusercontent.com/Xiaoxinyun2008/linux-tool/main/install.sh | tr -d '\r' | sudo bash -s --
+curl -sSL https://raw.githubusercontent.com/SilentByte-111/linux-tool/main/install.sh | tr -d '\r' | sudo bash -s --
 ```
 
 ### 手动安装

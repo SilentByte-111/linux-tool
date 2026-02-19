@@ -4,6 +4,9 @@
 # 支持本地 tool/ 目录或从 GitHub 仓库远程下载 tool/*.sh 并安装到 /usr/local/bin
 # 兼容大多数 Linux 发行版，交互输入从 /dev/tty 读取（适用于管道执行时交互）
 
+if [ "$EUID" -ne 0 ]; then
+    exec sudo bash "$0" "$@"
+fi
 set -euo pipefail
 
 # 配置仓库信息（如将来需要修改分支或仓库，可在这里改）

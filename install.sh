@@ -253,7 +253,8 @@ EOF
     echo -e "${NC}"
     echo -e "   ${BOLD}${CYAN}╔══════════════════════════════════════╗${NC}"
     echo -e "   ${BOLD}${CYAN}║${NC}    ${BOLD}强大的 Linux 工具集合管理器${NC}       ${BOLD}${CYAN}║${NC}"
-    echo -e "   ${BOLD}${CYAN}║${NC}         ${MAGENTA}/by 零意${NC}                   ${BOLD}${CYAN}║${NC}"
+    echo -e "   ${BOLD}${CYAN}║${NC}         ${MAGENTA}/by Silent Byte${NC}                   ${BOLD}${CYAN}║${NC}"
+    echo -e "                                             QQ:1950930166/2101497063"
     echo -e "   ${BOLD}${CYAN}╚══════════════════════════════════════╝${NC}"
     echo ""
 }

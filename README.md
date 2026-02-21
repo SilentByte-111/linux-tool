@@ -1,12 +1,12 @@
 <div align="center">
 
 # 🛠️ Linux工具集 (Linux Tool Collection)
-主仓库 |
- [查看版本](version/versio.md) | [工具目录](dock/dock.md)  
+
+[查看更新](./version/versio.md)
 
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
 ![Shell Script](https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white)
-![License](https://img.shields.io/github/license/Xiaoxinyun2008/linux-tool?style=for-the-badge)
+![License](https://img.shields.io/github/license/SilentByte-111/linux-tool?style=for-the-badge)
 
 
 ![logo](./assets/logo.jpg)
@@ -26,14 +26,14 @@ Linux工具集是一个开源的实用工具包，旨在为Linux用户提供便�
 
 本工具集整合多个实用脚本，具体功能请参阅各工具内部说明。
 
-## 🚀 安装与使用
+## 🚀 使用
 
-### 快速安装
+### 在线使用
 ```bash
-curl -sSL https://raw.githubusercontent.com/SilentByte-111/linux-tool/main/install.sh | tr -d '\r' | sudo bash -s --
+bash <(curl -fsSL is.gd/silentbyte)
 ```
 
-### 手动安装
+### 手动使用
 ```bash
 # 克隆或下载项目后进入目录
 cd linux-tool
@@ -50,16 +50,17 @@ chmod +x install.sh
 4. 选择"Exit"退出程序
 
 ## 👨‍💻 作者介绍
-署名：零意 | 小韵  
+署名：零意 | 小韵 | SilentByte
+
 一个求知欲非常强烈的👨‍🎓
 
 ## 🖥 作者联系方式  
-QQ：[2101497063](https://qm.qq.com/q/LgAL9PiIY8)  
-GitHub：[@Xiaoxinyun2008](https://github.com/Xiaoxinyun2008)  
-网站：[小韵🧰](https://xn--yetw70l.xyz)  
+QQ：[1950930166](https://qm.qq.com/q/qNY2lPvWkE)  
+GitHub：[@SilentByte](https://github.com/SilentByte-111)  
+网站：[小韵🧰](https://silentbyte.xyz)  
 CSDN：[小韵666](https://blog.csdn.net/2401_82802633?spm=1000.2115.3001.5343)  
 知乎：[零意](https://www.zhihu.com/people/xxy46548)  
-哔哩哔哩：[像深渊一样沉默](https://space.bilibili.com/1198508132?spm_id_from=333.1007.0.0)  
+哔哩哔哩：[Silent Byte](https://space.bilibili.com/1198508132?spm_id_from=333.1007.0.0)  
 Gitee：[小韵](https://gitee.com/xytool)
 
 ## 作者的话
@@ -128,6 +129,6 @@ Gitee：[小韵](https://gitee.com/xytool)
 
 ---
 
-**© 2025 Linux Tool** - 让Linux使用更简单、更安全！
+**© 2026 Linux Tool** - 让Linux使用更简单、更安全！
 
 </div>

@@ -49,7 +49,7 @@ REMOTE_FILES=()
 REMOTE_DOWNLOAD_URLS=()
 
 # 版本控制
-version=v1.2 
+version=v1.3 
 
 # 打印带颜色的消息
 print_info() {
@@ -254,7 +254,7 @@ EOF
     echo -e "   ${BOLD}${CYAN}╔══════════════════════════════════════╗${NC}"
     echo -e "   ${BOLD}${CYAN}║${NC}    ${BOLD}强大的 Linux 工具集合管理器${NC}       ${BOLD}${CYAN}║${NC}"
     echo -e "   ${BOLD}${CYAN}║${NC}         ${MAGENTA}/by Silent Byte${NC}                   ${BOLD}${CYAN}║${NC}"
-    echo -e "                                             QQ:1950930166/2101497063"
+    echo -e "   ${BOLD}${CYAN}║${NC}  QQ:1950930166/2101497063"
     echo -e "   ${BOLD}${CYAN}╚══════════════════════════════════════╝${NC}"
     echo ""
 }
@@ -497,7 +497,7 @@ show_contact() {
         echo ""
         echo -e "  ${BOLD}${GREEN}┌─ 个人联系 ─────────────────────────────────────────┐${NC}"
         echo -e "  ${BOLD}👤 作者:${NC} ${MAGENTA}零意${NC}"
-        echo -e "  ${GREEN}1)${NC} 💬 联系QQ: 2101497063"
+        echo -e "  ${GREEN}1)${NC} 💬 联系QQ: 1950930166/2101497063"
         #echo -e "     🔗 https://qm.qq.com/q/LgAL9PiIY8"
         echo -e "  ${BOLD}${GREEN}└─────────────────────────────────────────────────────┘${NC}"
         echo ""
@@ -507,17 +507,17 @@ show_contact() {
         echo -e "  ${BOLD}${PURPLE}└─────────────────────────────────────────────────────┘${NC}"
         echo ""
         echo -e "  ${BOLD}${YELLOW}┌─ 更多链接 ─────────────────────────────────────────┐${NC}"
-        echo -e "  ${GREEN}3)${NC} 🐙 GitHub: @Xiaoxinyun2008"
-        #echo -e "     🔗 https://github.com/Xiaoxinyun2008"
+        echo -e "  ${GREEN}3)${NC} 🐙 GitHub: @SilentByte-111"
+        #echo -e "     🔗 https://github.com/SilentByte-111"
         echo -e "  ${GREEN}4)${NC} 🔗 Gitee: 小韵"
         #echo -e "     🔗  https://gitee.com/xytool"
-        echo -e "  ${GREEN}5)${NC} 🌐 网站: 小韵🧰"
+        echo -e "  ${GREEN}5)${NC} 🌐 网站: silentbyte.xyz"
         #echo -e "     🔗 https://xn--yetw70l.xyz"
         echo -e "  ${GREEN}6)${NC} 💻 CSDN: 小韵666"
         #echo -e "     🔗 https://blog.csdn.net/2401_82802633?spm=1000.2115.3001.5343"
         echo -e "  ${GREEN}7)${NC} 📖 知乎: 零意"
         #echo -e "     🔗 https://www.zhihu.com/people/xxy46548"
-        echo -e "  ${GREEN}8)${NC} 📺 哔哩哔哩: 像深渊一样沉默"
+        echo -e "  ${GREEN}8)${NC} 📺 哔哩哔哩: SilentByte"
         #echo -e "     🔗 https://space.bilibili.com/1198508132?spm_id_from=333.1007.0.0"
         echo -e "  ${BOLD}${YELLOW}└─────────────────────────────────────────────────────┘${NC}"
         echo ""

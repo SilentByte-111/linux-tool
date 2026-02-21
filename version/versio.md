@@ -1,6 +1,5 @@
 # (LINUX TOOL)版本介绍
-[主仓库](../README.md)|
-查看版本 | [工具目录](../dock/dock.md)
+[主仓库](../README.md)
 
 ![logo](../assets/logo.jpg)
 
@@ -22,3 +21,8 @@
 - 修复♻️体逻辑漏洞
 - 修复logo反复出现
 - 添加了作者联系渠道
+
+## v1.3   ⌚2026-02-21
+- 添加子工具：[cloundNAS](https://github.com/SilentByte-111/nas-system)
+- 更新链接时效性
+- 更新许可证为GPL-v3

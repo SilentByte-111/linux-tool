@@ -6,8 +6,7 @@
 
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
 ![Shell Script](https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white)
-![License](https://img.shields.io/github/license/SilentByte-111/linux-tool?style=for-the-badge)
-
+![License](https://img.shields.io/badge/License-GPLv3-blue?style=for-the-badge)
 
 ![logo](./assets/logo.jpg)
 

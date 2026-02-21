@@ -42,6 +42,9 @@ chmod +x install.sh
 ./install.sh
 ```
 
+## Stargazers over time
+[![Stargazers over time](https://starchart.cc/c-rainstorm/blog.svg?variant=SilentByte-111)](https://starchart.cc/c-rainstorm/blog)
+
 ### 使用方法
 1. 运行`./install.sh`启动主菜单
 2. 选择"Install Tools"安装工具

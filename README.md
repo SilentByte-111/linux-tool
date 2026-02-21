@@ -43,7 +43,7 @@ chmod +x install.sh
 ```
 
 ## Stargazers over time
-[![Stargazers over time](https://starchart.cc/c-rainstorm/blog.svg?variant=SilentByte-111)](https://starchart.cc/c-rainstorm/blog)
+[![Stargazers over time](https://starchart.cc/SilentByte-111/linux-tool.svg?variant=adaptive)](https://starchart.cc/c-rainstorm/blog)
 
 ### 使用方法
 1. 运行`./install.sh`启动主菜单

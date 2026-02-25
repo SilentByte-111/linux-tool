@@ -1,0 +1,5 @@
+# linux-tool/tools.txt
+# 每行一个工具文件名
+cloundNAS
+fuck_rm
+tool

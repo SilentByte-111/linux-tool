@@ -6,6 +6,7 @@
 
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
 ![Shell Script](https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white)
+![Python](https://img.shields.io/badge/Python-Tkinter-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![License](https://img.shields.io/badge/License-GPLv3-blue?style=for-the-badge)
 
 ![logo](./assets/logo.jpg)
@@ -17,8 +18,18 @@
 
 ## 🌟 项目简介
 
-Linux工具集是一个开源的实用工具包，旨在为Linux用户提供便捷的系统管理和安全防护功能。通过简洁的一键安装脚本，您可以快速部署各种实用工具，提升Linux系统的便利性和安全性。
+Linux工具集是一个开源的实用工具包，旨在为Linux用户提供便捷的系统管理和安全防护功能。通过简洁的一键安装脚本，您可以快速部署各种实用工具，提升Linux系统的便利性和安全性。现在仓库同时提供一个基于 **Python + Tkinter** 的图形客户端，内置更新模块，可在多数 Linux 发行版上用统一界面启动工具、查看兼容性提示并检查更新。
 
+## 🖼 GUI 客户端
+
+新增 `client/linux_tool_client.py` 图形客户端，适合桌面 Linux 环境：
+
+- **工具启动器**：直接启动仓库里的 Shell 工具。
+- **更新模块**：从 GitHub 拉取版本信息并更新客户端核心文件。
+- **兼容性策略**：优先使用 Python 标准库与 Tkinter，减少对特定桌面框架的依赖。
+- **安装脚本**：可执行 `bash client/install_client.sh` 安装到 `~/.local/bin/linux-tool-client`。
+
+> 注意：由于不同发行版的软件源与桌面环境差异较大，"Linux 所有发行版都兼容" 在工程上更适合解释为 **尽量兼容主流发行版并提供依赖提示与终端回退方案**。当前方案已经覆盖 Debian/Ubuntu、Fedora/RHEL、Arch、openSUSE、Alpine 等常见环境。
 
 
 ## 🔧 工具集合
@@ -37,9 +48,22 @@ bash <(curl -fsSL is.gd/Xynrin)
 # 克隆或下载项目后进入目录
 cd linux-tool
 # 赋予执行权限
-chmod +x install.sh
-# 运行安装脚本
+chmod +x install.sh client/install_client.sh
+# 运行终端版安装脚本
 ./install.sh
+```
+
+### 启动 GUI 客户端
+```bash
+# 方式 1：直接运行
+python3 client/linux_tool_client.py
+
+# 方式 2：通过 install.sh 启动 GUI
+./install.sh --gui
+
+# 方式 3：安装到当前用户目录
+bash client/install_client.sh
+linux-tool-client
 ```
 
 ## Stargazers over time

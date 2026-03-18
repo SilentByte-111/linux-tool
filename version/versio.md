@@ -3,6 +3,12 @@
 
 ![logo](../assets/logo.jpg)
 
+## v2.0   ⌚2026-03-18
+- 仓库新增 `client/linux_tool_client.py` 图形客户端
+- 新增 GUI 更新模块，可检查远程版本并更新客户端核心文件
+- 新增 `client/install_client.sh`，可安装桌面入口与 `linux-tool-client` 启动命令
+- `install.sh` 增加 `--gui` 参数，可直接启动图形客户端
+
 ## v1.0   ⌚2025-12-16
 - Linux tool 正式成立
 - install 交互诞生

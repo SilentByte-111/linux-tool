@@ -1,0 +1,26 @@
+[
+  {
+    "id": "tool_manager",
+    "name": "全球命令管理工具",
+    "description": "把任意 .sh 脚本安装成全局命令，并管理说明信息。",
+    "script": "tool/tool.sh",
+    "requires_root": false,
+    "category": "命令管理"
+  },
+  {
+    "id": "fuck_rm",
+    "name": "危险命令防护",
+    "description": "为 rm、dd、mkfs 等高风险命令提供额外保护。",
+    "script": "tool/fuck_rm.sh",
+    "requires_root": true,
+    "category": "安全"
+  },
+  {
+    "id": "cloud_nas",
+    "name": "CloudNAS 子工具",
+    "description": "克隆并启动 CloudNAS 项目，可执行安装、更新和状态管理。",
+    "script": "tool/cloundNAS.sh",
+    "requires_root": true,
+    "category": "云存储"
+  }
+]

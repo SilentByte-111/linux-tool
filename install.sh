@@ -9,6 +9,14 @@ if [ "$EUID" -ne 0 ]; then
 fi
 set -euo pipefail
 
+if [ "${1:-}" = "--gui" ]; then
+    if ! command -v python3 >/dev/null 2>&1; then
+        echo "缺少 python3，无法启动 GUI 客户端" >&2
+        exit 1
+    fi
+    exec python3 "$(cd "$(dirname "$0")" && pwd)/client/linux_tool_client.py"
+fi
+
 # 配置仓库信息（如将来需要修改分支或仓库，可在这里改）
 REPO_OWNER="Xynrin"
 REPO_NAME="linux-tool"
